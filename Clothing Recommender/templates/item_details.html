@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block links %}
+<a href="/">Home</a>
+{% endblock %}
+
+<!-- Display the Clothing item details and its review -->
+{% block body %}
+<h2>Full Item Details with Clothing ID - {{ item[0]['Clothing ID'] }}  </h2>
+
+<ul>
+    {% for i in item %}
+<strong>Division Name:</strong> {{ i['Division Name'] }}<br><br>
+<strong>Department Name:</strong> {{ i['Department Name'] }}<br><br>
+<strong>Class Name:</strong> {{ i['Class Name'] }}<br><br>
+<strong>Clothes Title:</strong> {{ i['Clothes Title'] }}<br><br>
+<strong>Clothes Description:</strong> {{ i['Clothes Description'] }}<br><br>
+
+<strong>Age of Reviewer:</strong> {{ i['Age'] }}<br><br>
+<strong>Review Title:</strong> {{ i['Title'] }}<br><br>
+<strong>Review Text:</strong> {{ i['Review Text'] }}<br><br>
+<strong>Rating (1-5):</strong> {{ i['Rating'] }}<br><br>
+<strong>Recommended IND (0:no, 1:yes):</strong> {{ i['Recommended IND'] }}<br><br>
+<strong>Positive Feedback Count:</strong> {{ i['Positive Feedback Count'] }}<br><br>
+        
+<hr><br>
+{% endfor %}
+</ul>
+{% endblock %}

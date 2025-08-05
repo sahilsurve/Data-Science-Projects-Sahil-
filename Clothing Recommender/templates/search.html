@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block links %}
+<a href="/">Home</a>
+{% endblock %}
+
+{% block body %}
+<form action="/search" method="POST">
+    <!-- Input the keyword to search -->
+    <h1>Enter the category to search:</h1>
+    <p><input type="text" name="item_searched" style="width:30%" value="{{ search_value }}" required /></p>
+    <p><input type="submit" value="Search" /></p>
+
+    <!-- Display the number of matched items -->
+    {% if n_matched_items > 0 %}
+        <h2>The number of matched clothing items are: {{ n_matched_items }}</h2>
+        <br><br>
+
+        <h2>Click on the Clothing ID of an item to view its full details and Reviews </h2>
+
+        <!-- Display similar items -->
+        <ul>
+            {% for item in items %}
+                <div>
+                    <strong>Clothing ID:</strong> <a href="/clothing/{{ item['Clothing ID'] }}">  {{ item['Clothing ID'] }} </a><br>
+                    <strong >Class Name:</strong> {{ item['Class Name'] }}<br>
+                    <strong>Clothes Title:</strong> {{ item['Clothes Title'] }}<br><br>
+                    
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No similar items found.</p>
+    {% endif %}
+</form>
+{% endblock %}

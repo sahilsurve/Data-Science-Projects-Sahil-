@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Read the CSS and Jquery file used for formatting --> 
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }} " type="text/css" media="all" />
+<script src="{{ url_for('static', filename='jquery-3.6.0.js') }}"></script>
+</head>
+
+<body>
+
+<!-- Define the nav bar -->
+<ul class="nav-menu">
+  <li><a href="/search">Search Items</a></li>
+  <li><a href="/classify">Add Review</a></li>
+  <div class="topnav-right">
+      <li> {% block links %}       {% endblock %} </li>
+  </div>
+</ul>
+
+{% block body %}
+    <br><br><br>
+    <br>
+    <div style="text-align: center;">
+      <!-- Display the Heading and image -->
+        <h1 style="font-size: 3.5em;">Welcome to the Clothing Item Finder and Review Classifier</h1>
+        <img src="static/RMIT_logo.png" style="width: 80%; max-width: 400px;">
+    </div>
+{% endblock %}
+
+{% if show_footer %}
+    <footer style="text-align: right;">
+      <!-- Display the footer -->
+      <h1 style="font-size: 2.5em;">Made by Sahil Surve (S4017617)</h1>
+    </footer>
+{% endif %}
+</body>
+</html>
+

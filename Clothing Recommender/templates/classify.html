@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block links %}
+<a href="/">Home</a>
+{% endblock %} 
+
+{% block body %}
+
+<form action = "/classify" method = "POST">
+    <h1>Add Review </h1>
+    <!-- Get the review details from the user -->
+    <h2>Clothing ID:</h2>
+    <p><input type = "text" name = "clothing_id" style="width:5%" value="{{ clothing_id }}" required/></p>
+    <h2>Clothing Class Name (Eg. Sweaters, Dresses, Pants, etc):</h2>
+    <p><input type = "text" name = "class_name" style="width:30%" value="{{ class_name }}" required/></p>
+    <h2>Review Title:</h2>
+    <p><input type = "text" name = "title" style="width:80%" value="{{ title }}" required/></p>
+    <h2>Review Description:</h2>
+    <textarea type="text" name="description" style="height:80px; width:80%" required>{{ description }}</textarea>
+    <h2>Rating (1-5):</h2>
+    <p><input type = "text" name = "rating" style="width:50%" value="{{ rating }}"></p>
+
+    <!-- Display the prediction and ask user to accept or change it -->
+    <p><input type = "submit" name = "classify" value = "Classify" /></p>
+    <h2> Does the customer recommend the item (0:No, 1:Yes) : 
+        <input  type="text" name = "recommend" style="width:5%" value="{{ y_pred }}" /> </h2>
+    
+    <h2>If you are satisfied with the response, click on Submit Review </h2> 
+    <p><input type = "submit" name = "submit_review" value = "Submit Review" /></p>
+
+    
+        <h2 style="color:red" >{{ message }}</h2>
+    
+</form> 
+
+
+
+{% endblock %}
