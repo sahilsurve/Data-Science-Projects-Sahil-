@@ -27,7 +27,7 @@ Viewing the top feature importance chart
 Adjust your financial information using interactive sliders with description
 <img width="1898" height="1091" alt="image" src="https://github.com/user-attachments/assets/aac5ef73-2bde-4d06-a86d-3dc9e9ad5193" />
 
-Viewing the model perforamce metrics and real time risk prediction 
+Viewing the model performance metrics and real time risk prediction 
 <img width="1918" height="1088" alt="image" src="https://github.com/user-attachments/assets/68796a07-21ff-4af0-912c-fa829c5f5adb" />
 
 ### 💡 Most Difficult Challenge
