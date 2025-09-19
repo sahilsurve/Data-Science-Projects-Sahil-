@@ -12,7 +12,7 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
       DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-      REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Dev
+      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline (DEV)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
       DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-      REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Prod
+      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline (PROD)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
