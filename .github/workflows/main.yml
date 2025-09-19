@@ -32,7 +32,7 @@ jobs:
 
       - name: Upload Notebooks to Dev
         run: |
-          databricks workspace import_dir notebooks/ "${{ env.REPO_PATH }}" --overwrite
+          databricks workspace import_dir notebooks/ "${{ env.REPO_PATH }}" --overwrite=true
 
   deploy-prod:
     needs: deploy-dev
@@ -61,4 +61,4 @@ jobs:
 
       - name: Upload Notebooks to Prod
         run: |
-            databricks workspace import_dir notebooks/ "${{ env.REPO_PATH }}" --overwrite
+            databricks workspace import_dir notebooks/ "${{ env.REPO_PATH }}" --overwrite=true
