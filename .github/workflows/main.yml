@@ -6,30 +6,29 @@ on:
     branches:
       - main
 jobs:
-
   deploy-dev:
-  runs-on: ubuntu-latest
-  environment: development
-  env:
-    DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
-    DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-    REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Dev
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.8
-    - name: Set up Databricks CLI
-      uses: databricks/setup-cli@main
-    - name: Extract branch name
-      id: extract_branch
-      run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-    - name: Update Databricks Repo (Dev)
-      run: |
-        databricks repos update "${{ env.REPO_PATH }}" \
-        --branch "${{ steps.extract_branch.outputs.branch }}"
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
+      DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
+      REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Dev
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@main
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+      - name: Update Databricks Repo (Dev)
+        run: |
+          databricks repos update "${{ env.REPO_PATH }}" \
+          --branch "${{ steps.extract_branch.outputs.branch }}"
 
   deploy-prod:
     needs: deploy-dev
