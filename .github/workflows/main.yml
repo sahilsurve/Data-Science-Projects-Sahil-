@@ -8,34 +8,28 @@ on:
 jobs:
 
   deploy-dev:
-    runs-on: ubuntu-latest
-    environment: development
-    env:
-      DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
-      DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Dev
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.8
-
-      - name: Set up Databricks CLI
-        uses: databricks/setup-cli@main
-
-      - name: Extract branch name
-        id: extract_branch_prod
-        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-
-      - name: Deploy Notebooks to Dev
-        run: |
-          databricks workspace delete "/Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Dev" --recursive || true
-          databricks workspace import-dir notebooks/ "/Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Dev"
-
+  runs-on: ubuntu-latest
+  environment: development
+  env:
+    DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
+    DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
+    REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Dev
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.8
+    - name: Set up Databricks CLI
+      uses: databricks/setup-cli@main
+    - name: Extract branch name
+      id: extract_branch
+      run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+    - name: Update Databricks Repo (Dev)
+      run: |
+        databricks repos update "${{ env.REPO_PATH }}" \
+        --branch "${{ steps.extract_branch.outputs.branch }}"
 
   deploy-prod:
     needs: deploy-dev
@@ -44,25 +38,21 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DEPLOYMENT_TARGET_URL }}
       DATABRICKS_TOKEN: ${{ secrets.DEPLOYMENT_TARGET_TOKEN }}
-      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Prod
-  
+      REPO_PATH: /Workspace/Repos/sahilssurve2@gmail.com/Prod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-  
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-
       - name: Set up Databricks CLI
         uses: databricks/setup-cli@main
-
       - name: Extract branch name
         id: extract_branch
         run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-
-      - name: Deploy Notebooks to Prod
+      - name: Update Databricks Repo (Prod)
         run: |
-          databricks workspace delete "/Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Prod" --recursive || true
-          databricks workspace import-dir notebooks/ "/Workspace/Users/sahilssurve2@gmail.com/Data-Science-Projects-Sahil-/Automated CI-CD Databricks pipeline/Prod"
+          databricks repos update "${{ env.REPO_PATH }}" \
+          --branch "${{ steps.extract_branch.outputs.branch }}"
+
