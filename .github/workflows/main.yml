@@ -54,4 +54,3 @@ jobs:
         run: |
           databricks repos update "${{ env.REPO_PATH }}" \
           --branch "${{ steps.extract_branch.outputs.branch }}"
-
