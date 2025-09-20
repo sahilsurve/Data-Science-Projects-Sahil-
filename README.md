@@ -1,2 +1,2 @@
 # Data-Science-Projects-Sahil-
-End-to-end data science and analytics projects using Python, Power BI, SQL, Databricks and Machine Learning – focused on solving real-world business problems.
+My End-to-end data science and analytics projects made using Python, Power BI, SQL, Databricks, Pyspark, CI/CD and Machine Learning with focus on solving real-world business problems.
