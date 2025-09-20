@@ -11,18 +11,18 @@ This pipeline simulates a real-world Data Engineering lifecycle, combining versi
 
 ### 🚀 Features
 
-- **Two Isolated Environments (Dev & Prod)**
+- **Two Isolated Environments (Dev & Prod)**\
 Managed via separate Azure Resource Groups and Databricks Workspaces for proper environment segregation.
 
-- **GitHub Actions for CI/CD**
-CI: Runs on commits to main branch → syncs code into Dev workspace.
+- **GitHub Actions for CI/CD**\
+CI: Runs on commits to main branch → syncs code into Dev workspace.\
 CD: Deploys validated changes into Prod workspace automatically.
 
-- **Catalog & Schema for Storage**
+- **Catalog & Schema for Storage**\
 Notebook outputs are saved as Delta tables in Databricks Catalog ensuring structured storage.
 
-- **Power BI Integration**
-Leveraged Databricks to connect tables directly into Power BI.
+- **Power BI Integration**\
+Leveraged Databricks to connect tables directly into Power BI.\
 Dashboard refresh automatically reflects any new data pushed from Dev → Prod.
 
 - **End-to-End Automation**
