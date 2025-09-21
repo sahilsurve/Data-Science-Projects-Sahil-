@@ -1,0 +1,75 @@
+name: CI-CD Databricks Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/**
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DATABRICKS_HOST: ${{ secrets.DEV_DEPLOYMENT_TARGET_URL }}
+      DATABRICKS_TOKEN: ${{ secrets.DEV_DEPLOYMENT_TARGET_TOKEN }}
+      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Automated-CI-CD-Databricks-pipeline-DEV
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Deploy Notebook to Dev
+        run: |
+          databricks repos update "${{ env.REPO_PATH }}" --branch main
+
+      - name: Run Notebook Tests in Dev
+        run: |
+          databricks runs submit --json '{
+            "run_name": "CI-Test-Sales-Notebook",
+            "tasks": [{
+              "task_key": "run-sales-notebook",
+              "notebook_task": {
+                "notebook_path": "${{ env.REPO_PATH }}/Sales Data notebook for Data processing"
+              },
+              "new_cluster": {
+                "spark_version": "13.3.x-scala2.12",
+                "node_type_id": "Standard_DS3_v2",
+                "num_workers": 1
+              }
+            }]
+          }'
+
+  deploy-prod:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABRICKS_HOST: ${{ secrets.PROD_DEPLOYMENT_TARGET_URL }}
+      DATABRICKS_TOKEN: ${{ secrets.PROD_DEPLOYMENT_TARGET_TOKEN }}
+      REPO_PATH: /Workspace/Users/sahilssurve2@gmail.com/Automated-CI-CD-Databricks-pipeline-PROD
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Deploy Notebook to Prod
+        run: |
+          databricks repos update "${{ env.REPO_PATH }}" --branch main
