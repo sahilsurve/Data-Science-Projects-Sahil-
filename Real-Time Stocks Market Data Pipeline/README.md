@@ -8,7 +8,7 @@ The goal is to simulate real-time stock market data ingestion, transformation, a
 
 The data is streamed from the **Finnhub Stock API** into **Kafka**, stored in **MinIO** (S3-compatible object store), transformed through **dbt models in Snowflake** following a **Medallion Architecture** (Bronze → Silver → Gold), and finally visualized dynamically in **Power BI**.
 
-<img width="1213" height="735" alt="Architecture" src="https://github.com/user-attachments/assets/464737f0-69c3-47a9-b028-c455a86d4326" />
+<img width="1088" height="621" alt="Architecture" src="https://github.com/user-attachments/assets/d6232854-c990-4888-bd81-1d782544e633" />
 <br>
 
 ## 🚀 Features
