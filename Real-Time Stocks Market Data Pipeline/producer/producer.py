@@ -12,7 +12,7 @@ from kafka import KafkaProducer
 
 # Define API connection variables
 
-API_KEY = 'd3irfgpr01qruraialm0d3irfgpr01qruraialmg'            # API key retrieved from website and its url + v1/quote
+API_KEY = '<your api key>'            # API key retrieved from website and its url + v1/quote
 BASE_URL = "https://finnhub.io/api/v1/quote"
 SYMBOLS = ["AAPL", "MSFT", "TSLA", "GOOGL", "AMZN"]             # List of stock symbols to track 
 
