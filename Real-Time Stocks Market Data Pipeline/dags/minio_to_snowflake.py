@@ -11,8 +11,8 @@ MINIO_SECRET_KEY = "password123"
 BUCKET = "bronze-transactions"
 LOCAL_DIR = "/tmp/minio_downloads"  # use absolute path for Airflow
 
-SNOWFLAKE_USER = "sahilsurve"
-SNOWFLAKE_PASSWORD = "Sahil@123456789"
+SNOWFLAKE_USER = "<your username>"
+SNOWFLAKE_PASSWORD = "<your password>"
 SNOWFLAKE_ACCOUNT = "iy41040.ap-southeast-2"
 SNOWFLAKE_WAREHOUSE = "COMPUTE_WH"
 SNOWFLAKE_DB = "STOCKS_MDS"
